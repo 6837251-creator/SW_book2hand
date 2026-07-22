@@ -3,423 +3,183 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SW Book2Hand - ตลาดหนังสือมือสอง โรงเรียนสตูลวิทยา</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <!-- Google Fonts: Kanit -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            kanit: ['Kanit', 'sans-serif'],
-          },
-          colors: {
-            sw: {
-              green: '#1b5e20', // เขียวเข้ม สดใส สไตล์ สตูลวิทยา
-              lightgreen: '#2e7d32',
-              softgreen: '#e8f5e9',
-              yellow: '#fbc02d', // เหลืองทอง
-              lightyellow: '#fff9c4',
-              accent: '#f57f17'
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <title>ตลาดหนังสือมือสอง - สตูลวิทยา</title>
   <style>
-    body { font-family: 'Kanit', sans-serif; }
+    :root {
+      --primary-color: #0056b3;
+      --bg-color: #f4f6f9;
+      --accent-color: #28a745;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Sarabun', 'Tahoma', sans-serif;
+      margin: 0; padding: 0;
+      background-color: var(--bg-color);
+      color: #333;
+    }
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+    .action-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .search-input {
+      flex: 1; padding: 12px; border: 2px solid #e2e8f0;
+      border-radius: 8px; font-size: 1rem; outline: none;
+    }
+    .btn-add {
+      background-color: var(--primary-color); color: white;
+      padding: 12px 20px; border-radius: 8px; text-decoration: none;
+      font-weight: bold; display: inline-block; text-align: center;
+    }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .book-card {
+      background: white; border-radius: 12px; padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden;
+    }
+    .book-img-container {
+      width: 100%;
+      height: 200px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .book-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .no-img {
+      color: #888;
+      font-size: 0.9em;
+    }
+    .book-title { font-weight: bold; font-size: 1.1em; margin-bottom: 6px; }
+    .book-tag {
+      display: inline-block; background: #e9ecef; padding: 3px 10px;
+      border-radius: 20px; font-size: 0.8em; color: #495057; margin-bottom: 10px;
+    }
+    .price { color: #e63946; font-size: 1.2em; font-weight: bold; margin-top: 10px; }
+    .btn-contact {
+      background-color: var(--accent-color); color: white; border: none;
+      padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;
+      width: 100%; margin-top: 10px;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-yellow-50 to-emerald-50 min-h-screen text-gray-800 flex flex-col justify-between">
+<body>
 
-  <!-- Header / Navbar -->
-  <header class="bg-sw-green text-white shadow-lg sticky top-0 z-50 border-b-4 border-sw-yellow">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-        <div class="bg-sw-yellow text-sw-green p-2.5 rounded-full shadow-md">
-          <i class="fa-solid fa-book-bookmark text-2xl"></i>
-        </div>
-        <div>
-          <span class="font-bold text-xl md:text-2xl tracking-wide text-sw-yellow block leading-tight">SW Book2Hand</span>
-          <span class="text-xs text-green-200 font-light hidden sm:block">ตลาดส่งต่อหนังสือมือสอง โรงเรียนสตูลวิทยา</span>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="showPage('home')" class="px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-green-700 transition">
-          <i class="fa-solid fa-house mr-1"></i> หน้าแรก
-        </button>
-        <button onclick="showPage('post')" class="bg-sw-yellow hover:bg-yellow-400 text-green-950 font-bold px-4 py-2 rounded-xl text-sm transition shadow-md flex items-center gap-1.5 transform hover:scale-105">
-          <i class="fa-solid fa-plus-circle text-lg"></i> ลงขายหนังสือ
-        </button>
-      </div>
-    </div>
+  <header>
+    <h1>📚 SW Book2Hand</h1>
+    <p>ตลาดส่งต่อหนังสือมือสอง โรงเรียนสตูลวิทยา</p>
   </header>
 
-  <!-- Banner โรงเรียน -->
-  <div class="bg-gradient-to-r from-green-800 via-sw-green to-emerald-800 text-white py-6 shadow-inner">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h1 class="text-2xl md:text-3xl font-bold text-sw-yellow mb-1">📗 ตลาดหนังสือมือสอง สตูลวิทยา 🟡</h1>
-      <p class="text-green-100 text-sm md:text-base font-light">ประหยัด สะดวก นัดรับง่ายภายในรั้วโรงเรียนสตูลวิทยา</p>
+  <div class="container">
+    <div class="action-bar">
+      <input type="text" id="searchInput" class="search-input" onkeyup="filterBooks()" placeholder="ค้นหาชื่อหนังสือ, รายวิชา หรือระดับชั้น...">
+      <!-- ลิงก์ไปยัง Google Form ของคุณ -->
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScyyE10-SwP5qX3941NnJ2XW68/viewform" target="_blank" class="btn-add">➕ ลงขายหนังสือ</a>
+    </div>
+
+    <div class="book-grid" id="bookGrid">
+      <p id="loading">กำลังโหลดข้อมูลหนังสือ...</p>
     </div>
   </div>
-
-  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
-
-    <!-- PAGE 1: หน้าหลักแสดงหนังสือ -->
-    <div id="homePage">
-      
-      <!-- ค้นหา + ตัวกรองหมวดหมู่ -->
-      <div class="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-green-100 mb-8 space-y-4">
-        <!-- ช่องค้นหา -->
-        <div class="relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"></i>
-          <input type="text" id="searchInput" onkeyup="filterBooks()" placeholder="ค้นหาชื่อหนังสือ, วิชา, หรือสถานที่นัดรับ..." 
-                 class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sw-green focus:border-transparent text-gray-700 shadow-sm">
-        </div>
-
-        <!-- ปุ่มเลือกหมวดหมู่ -->
-        <div class="flex flex-wrap gap-2 pt-2 items-center">
-          <span class="text-xs md:text-sm font-semibold text-gray-600 mr-2"><i class="fa-solid fa-filter text-sw-green"></i> หมวดหมู่:</span>
-          <button onclick="setCategory('ทั้งหมด')" class="cat-btn active-cat bg-sw-green text-white text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition shadow-sm">ทั้งหมด</button>
-          <button onclick="setCategory('หนังสือเรียน')" class="cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition">📖 หนังสือเรียน</button>
-          <button onclick="setCategory('คู่มือเตรียมสอบ')" class="cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition">📝 คู่มือเตรียมสอบ</button>
-          <button onclick="setCategory('นิยาย / วรรณกรรม')" class="cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition">📚 นิยาย / วรรณกรรม</button>
-          <button onclick="setCategory('การ์ตูน / ความรู้')" class="cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition">🎨 การ์ตูน / ความรู้</button>
-          <button onclick="setCategory('อื่นๆ')" class="cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition">📌 อื่นๆ</button>
-        </div>
-      </div>
-
-      <!-- หัวข้อการแสดงผล -->
-      <div class="flex justify-between items-center mb-4 px-1">
-        <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-          <span class="w-2.5 h-6 bg-sw-yellow rounded-full inline-block"></span>
-          รายการหนังสือทั้งหมด <span id="bookCount" class="text-sm font-normal text-gray-500">(0 เล่ม)</span>
-        </h2>
-      </div>
-
-      <!-- Container แสดงการ์ดหนังสือ -->
-      <div id="bookContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- JS จะสร้างรายการหนังสือตรงนี้ -->
-      </div>
-    </div>
-
-    <!-- PAGE 2: หน้าลงขายหนังสือ -->
-    <div id="postPage" class="hidden max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-green-100">
-      <div class="border-b pb-4 mb-6 text-center">
-        <h2 class="text-2xl font-bold text-sw-green flex items-center justify-center gap-2">
-          <i class="fa-solid fa-file-circle-plus text-sw-yellow"></i> ลงขายหนังสือมือสอง
-        </h2>
-        <p class="text-xs text-gray-500 mt-1">กรอกข้อมูลหนังสือให้ครบถ้วนเพื่อให้เพื่อนๆ ติดต่อซื้อได้ง่ายขึ้น</p>
-      </div>
-
-      <form id="addBookForm" onsubmit="addNewBook(event)" class="space-y-4">
-        <!-- 1. ชื่อหนังสือ -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1">1. ชื่อหนังสือ <span class="text-red-500">*</span></label>
-          <input type="text" id="bookTitle" required placeholder="เช่น ตะลุยโจทย์ ฟิสิกส์ A-Level, นิยาย Sherlock Holmes" 
-                 class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-        </div>
-
-        <!-- 2. หมวดหมู่หนังสือ -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1">2. หมวดหมู่หนังสือ <span class="text-red-500">*</span></label>
-          <select id="bookCategory" required class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none bg-white">
-            <option value="หนังสือเรียน">📖 หนังสือเรียน (ตามรายวิชา ม.1 - ม.6)</option>
-            <option value="คู่มือเตรียมสอบ">📝 คู่มือเตรียมสอบ / ข้อสอบเก่า / TCAS</option>
-            <option value="นิยาย / วรรณกรรม">📚 นิยาย / วรรณกรรม / เรื่องสั้น</option>
-            <option value="การ์ตูน / ความรู้">🎨 การ์ตูน / หนังสือความรู้ทั่วไป</option>
-            <option value="อื่นๆ">📌 อื่นๆ</option>
-          </select>
-        </div>
-
-        <!-- 3. ราคา & สภาพ -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">3. ราคาขาย (บาท) <span class="text-red-500">*</span></label>
-            <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">฿</span>
-              <input type="number" id="bookPrice" min="0" required placeholder="50" 
-                     class="w-full pl-8 p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">4. สภาพหนังสือ <span class="text-red-500">*</span></label>
-            <input type="text" id="bookCondition" required placeholder="เช่น 95% สภาพใหม่ / มีรอยไฮไลท์เล็กน้อย" 
-                   class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-          </div>
-        </div>
-
-        <!-- 5. จุดนัดรับในโรงเรียน -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1">5. จุดนัดรับภายในโรงเรียนสตูลวิทยา <span class="text-red-500">*</span></label>
-          <input type="text" id="bookLocation" required placeholder="เช่น โรงอาหาร ม.ปลาย, หน้าอาคาร 1, โดมอเนกประสงค์" 
-                 class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-        </div>
-
-        <!-- 6. ช่องทางติดต่อ & 7. รหัสประจำตัวนักเรียน -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">6. ช่องทางติดต่อ (Line / IG / โทร) <span class="text-red-500">*</span></label>
-            <input type="text" id="bookContact" required placeholder="เช่น Line: @sw_student1 หรือ IG: @myname" 
-                   class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">7. รหัสประจำตัวนักเรียน (ผู้ขาย) <span class="text-red-500">*</span></label>
-            <input type="text" id="studentId" required placeholder="เช่น 35892 (เพื่อความน่าเชื่อถือ)" 
-                   class="w-full p-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sw-green focus:border-transparent outline-none">
-          </div>
-        </div>
-
-        <!-- ปุ่มกด -->
-        <div class="flex gap-3 pt-4">
-          <button type="button" onclick="showPage('home')" 
-                  class="w-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-xl font-semibold transition">
-            ยกเลิก
-          </button>
-          <button type="submit" 
-                  class="w-1/2 bg-sw-green hover:bg-green-800 text-sw-yellow font-bold py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
-            <i class="fa-solid fa-check"></i> โพสต์ขายทันที
-          </button>
-        </div>
-      </form>
-    </div>
-
-  </main>
-
-  <!-- Modal สำหรับดูรายละเอียดและติดต่อผู้ขาย -->
-  <div id="contactModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform transition-all border-t-8 border-sw-yellow">
-      <div class="flex justify-between items-start mb-3">
-        <span id="modalCategory" class="bg-green-100 text-sw-green text-xs font-bold px-2.5 py-1 rounded-md">หมวดหมู่</span>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
-      </div>
-
-      <h3 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">ชื่อหนังสือ</h3>
-      
-      <div class="space-y-2 bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm mb-4">
-        <p class="flex justify-between"><span class="text-gray-500">ราคาขาย:</span> <span id="modalPrice" class="font-bold text-emerald-600 text-lg">฿0</span></p>
-        <p class="flex justify-between"><span class="text-gray-500">สภาพหนังสือ:</span> <span id="modalCondition" class="font-medium text-gray-700">-</span></p>
-        <p class="flex justify-between"><span class="text-gray-500">จุดนัดรับ (สตูลวิทยา):</span> <span id="modalLocation" class="font-medium text-gray-700">-</span></p>
-        <p class="flex justify-between"><span class="text-gray-500">รหัสนักเรียนผู้ขาย:</span> <span id="modalStudentId" class="font-mono font-medium text-blue-600">-</span></p>
-      </div>
-
-      <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-xl text-center mb-4">
-        <p class="text-xs text-yellow-800 font-medium mb-1"><i class="fa-solid fa-comments"></i> ช่องทางติดต่อซื้อขาย:</p>
-        <p id="modalContact" class="text-base font-bold text-sw-green select-all">-</p>
-      </div>
-
-      <button onclick="closeModal()" class="w-full bg-sw-green hover:bg-green-800 text-white font-bold py-2.5 rounded-xl transition">
-        ปิดหน้าต่าง
-      </button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-sw-green text-white text-center py-4 text-xs border-t-2 border-sw-yellow">
-    <p>© 2026 SW Book2Hand — ตลาดหนังสือมือสอง โรงเรียนสตูลวิทยา (จังหวัดสตูล)</p>
-  </footer>
 
   <script>
-    // 1. ข้อมูลเริ่มต้น (Mock Data)
-    let books = [
-      {
-        id: 1,
-        title: 'คู่มือเตรียมสอบ เคมี A-Level สรุปเข้ม',
-        category: 'คู่มือเตรียมสอบ',
-        price: 90,
-        condition: '90% มีรอยไฮไลท์บางหน้า',
-        location: 'โรงอาหาร ม.ปลาย / ตึก 3',
-        contact: 'Line ID: @sw_chem_top',
-        studentId: '34102',
-        date: '22 ก.ค. 2026'
-      },
-      {
-        id: 2,
-        title: 'คณิตศาสตร์เพิ่มเติม ม.4 เล่ม 1',
-        category: 'หนังสือเรียน',
-        price: 50,
-        condition: '85% เขียนด้วยดินสอ สามารถลบได้',
-        location: 'หน้าอาคารอำนวยการ (ตึก 1)',
-        contact: 'IG: @satun_book_shop',
-        studentId: '35219',
-        date: '21 ก.ค. 2026'
-      },
-      {
-        id: 3,
-        title: 'นิยาย แฮร์รี่ พอตเตอร์ กับศิลาอาถรรพ์ (เล่ม 1)',
-        category: 'นิยาย / วรรณกรรม',
-        price: 120,
-        condition: '98% ใหม่มาก อ่านรอบเดียว',
-        location: 'โดมอเนกประสงค์',
-        contact: 'โทร / Line: 081-234-5678',
-        studentId: '33980',
-        date: '20 ก.ค. 2026'
-      },
-      {
-        id: 4,
-        title: 'การ์ตูนความรู้ พืชปะทะซอมบี้ ตอน วิทยาศาสตร์สุดสนุก',
-        category: 'การ์ตูน / ความรู้',
-        price: 40,
-        condition: '80% สภาพดี ไส้แม็กแน่น',
-        location: 'ห้องหัตถการ / โดม ม.ต้น',
-        contact: 'Line ID: @student_sw4',
-        studentId: '36112',
-        date: '19 ก.ค. 2026'
+    // ลิงก์ CSV จาก Google Sheets ของคุณ
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/1-Eu_7m_CrsOkqOjbP34rlR-o9kl8hphOFzDa7D_m8TQ/export?format=csv';
+
+    // แปลงลิงก์รูป Google Drive ให้เป็นลิงก์ที่แสดงภาพบนเว็บได้
+    function formatDriveUrl(url) {
+      if (!url) return '';
+      const match = url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        return `https://lh3.googleusercontent.com/d/${match[1]}`;
       }
-    ];
-
-    let currentCategory = 'ทั้งหมด';
-
-    // 2. แสดงรายการหนังสือ
-    function renderBooks(bookList) {
-      const container = document.getElementById('bookContainer');
-      const countEl = document.getElementById('bookCount');
-      container.innerHTML = '';
-      countEl.innerText = `(${bookList.length} เล่ม)`;
-
-      if (bookList.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full text-center py-12 bg-white rounded-2xl shadow-sm border border-dashed border-gray-300">
-            <i class="fa-solid fa-book-open text-4xl text-gray-300 mb-3"></i>
-            <p class="text-gray-500 font-medium">ไม่พบรายการหนังสือที่คุณค้นหา</p>
-            <p class="text-xs text-gray-400 mt-1">ลองเปลี่ยนคำค้นหา หรือเปลี่ยนหมวดหมู่ดูนะครับ</p>
-          </div>
-        `;
-        return;
-      }
-
-      bookList.forEach(book => {
-        const card = `
-          <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-green-50 flex flex-col justify-between overflow-hidden group">
-            <div class="p-5">
-              <div class="flex justify-between items-center mb-3">
-                <span class="bg-sw-softgreen text-sw-green text-xs font-bold px-2.5 py-1 rounded-md border border-green-200">
-                  ${book.category}
-                </span>
-                <span class="text-[11px] text-gray-400"><i class="fa-regular fa-clock"></i> ${book.date}</span>
-              </div>
-
-              <h3 class="font-bold text-lg text-gray-800 line-clamp-2 mb-2 group-hover:text-sw-green transition-colors">
-                ${book.title}
-              </h3>
-
-              <div class="space-y-1.5 text-xs text-gray-600 mt-3">
-                <p><span class="font-semibold text-gray-500">สภาพ:</span> ${book.condition}</p>
-                <p class="text-emerald-700 font-medium"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> นัดรับ: ${book.location}</p>
-                <p class="text-gray-400"><i class="fa-solid fa-id-card text-blue-400 mr-1"></i> ผู้ขาย (รหัส): ${book.studentId}</p>
-              </div>
-            </div>
-
-            <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
-              <div>
-                <span class="text-xs text-gray-400 block">ราคา</span>
-                <span class="text-xl font-extrabold text-sw-green">฿${book.price}</span>
-              </div>
-              <button onclick="openModal(${book.id})" 
-                      class="bg-sw-green hover:bg-green-800 text-sw-yellow font-bold text-xs px-4 py-2.5 rounded-xl transition shadow flex items-center gap-1">
-                <i class="fa-solid fa-comments"></i> ติดต่อซื้อ
-              </button>
-            </div>
-          </div>
-        `;
-        container.innerHTML += card;
-      });
+      return url;
     }
 
-    // 3. กรองตามหมวดหมู่
-    function setCategory(cat) {
-      currentCategory = cat;
-      
-      // สลับสีปุ่ม
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        if (btn.innerText.includes(cat) || (cat === 'ทั้งหมด' && btn.innerText === 'ทั้งหมด')) {
-          btn.className = 'cat-btn active-cat bg-sw-green text-white text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition shadow-sm';
-        } else {
-          btn.className = 'cat-btn bg-gray-100 hover:bg-green-100 text-gray-700 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-medium transition';
+    async function loadBooks() {
+      try {
+        const response = await fetch(csvUrl);
+        const data = await response.text();
+        const rows = data.split('\n').slice(1); // ข้ามหัวข้อ
+        const grid = document.getElementById('bookGrid');
+        grid.innerHTML = '';
+
+        let hasData = false;
+
+        rows.forEach(row => {
+          const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+          
+          if (cols.length >= 5) {
+            // ดึงข้อมูลตามลำดับคอลัมน์ใน Google Sheets
+            const imgRaw = (cols[1] || '').replace(/^"|"$/g, '').trim();  // ข้อที่ 0. หน้าปกหนังสือ
+            const title = (cols[2] || '').replace(/^"|"$/g, '').trim();   // ข้อที่ 1. ชื่อหนังสือ
+            const tag = (cols[3] || '').replace(/^"|"$/g, '').trim();     // ข้อที่ 2. ระดับชั้น
+            const detail = (cols[4] || '').replace(/^"|"$/g, '').trim();  // ข้อที่ 3. รายละเอียด
+            const price = (cols[5] || '').replace(/^"|"$/g, '').trim();   // ข้อที่ 4. ราคา
+            const contact = (cols[6] || '').replace(/^"|"$/g, '').trim(); // ข้อที่ 5. ช่องทางติดต่อ
+
+            if (title) {
+              hasData = true;
+              const imgUrl = formatDriveUrl(imgRaw);
+              const imgHTML = imgUrl 
+                ? `<img src="${imgUrl}" class="book-img" alt="${title}" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'no-img\'>📷 ไม่มีรูปภาพ</span>';">`
+                : `<span class="no-img">📷 ไม่มีรูปภาพ</span>`;
+
+              const card = document.createElement('div');
+              card.className = 'book-card';
+              card.innerHTML = `
+                <div>
+                  <div class="book-img-container">
+                    ${imgHTML}
+                  </div>
+                  <span class="book-tag">${tag || 'ทั่วไป'}</span>
+                  <div class="book-title">${title}</div>
+                  <p style="font-size:0.9em; color:#666; margin:4px 0;">${detail}</p>
+                </div>
+                <div>
+                  <div class="price">฿${price}</div>
+                  <button class="btn-contact" onclick="alert('ช่องทางติดต่อ: ${contact}')">ทักแชตซื้อหนังสือ</button>
+                </div>
+              `;
+              grid.appendChild(card);
+            }
+          }
+        });
+
+        if (!hasData) {
+          grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">ยังไม่มีรายการหนังสือที่ลงขายในขณะนี้</p>';
         }
-      });
-
-      filterBooks();
-    }
-
-    // 4. ฟังก์ชันค้นหาและกรองรวม
-    function filterBooks() {
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      
-      const filtered = books.filter(b => {
-        const matchCategory = (currentCategory === 'ทั้งหมด') || (b.category === currentCategory);
-        const matchSearch = b.title.toLowerCase().includes(search) || 
-                            b.location.toLowerCase().includes(search) ||
-                            b.category.toLowerCase().includes(search);
-        return matchCategory && matchSearch;
-      });
-
-      renderBooks(filtered);
-    }
-
-    // 5. เพิ่มหนังสือใหม่
-    function addNewBook(e) {
-      e.preventDefault();
-
-      const newBook = {
-        id: Date.now(),
-        title: document.getElementById('bookTitle').value,
-        category: document.getElementById('bookCategory').value,
-        price: document.getElementById('bookPrice').value,
-        condition: document.getElementById('bookCondition').value,
-        location: document.getElementById('bookLocation').value,
-        contact: document.getElementById('bookContact').value,
-        studentId: document.getElementById('studentId').value,
-        date: 'วันนี้'
-      };
-
-      books.unshift(newBook);
-      filterBooks();
-      document.getElementById('addBookForm').reset();
-      showPage('home');
-      alert('🎉 ลงประกาศขายหนังสือสำเร็จแล้ว!');
-    }
-
-    // 6. สลับหน้า
-    function showPage(page) {
-      if (page === 'home') {
-        document.getElementById('homePage').classList.remove('hidden');
-        document.getElementById('postPage').classList.add('hidden');
-      } else {
-        document.getElementById('homePage').classList.add('hidden');
-        document.getElementById('postPage').classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('bookGrid').innerHTML = '<p style="grid-column: 1/-1; text-align: center;">ไม่สามารถโหลดข้อมูลได้ในขณะนี้</p>';
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 7. ควบคุม Modal ติดต่อ
-    function openModal(id) {
-      const book = books.find(b => b.id === id);
-      if (!book) return;
-
-      document.getElementById('modalTitle').innerText = book.title;
-      document.getElementById('modalCategory').innerText = book.category;
-      document.getElementById('modalPrice').innerText = `฿${book.price}`;
-      document.getElementById('modalCondition').innerText = book.condition;
-      document.getElementById('modalLocation').innerText = book.location;
-      document.getElementById('modalStudentId').innerText = book.studentId;
-      document.getElementById('modalContact').innerText = book.contact;
-
-      document.getElementById('contactModal').classList.remove('hidden');
+    function filterBooks() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.getElementsByClassName('book-card');
+      for (let i = 0; i < cards.length; i++) {
+        const text = cards[i].innerText.toLowerCase();
+        cards[i].style.display = text.includes(input) ? "" : "none";
+      }
     }
 
-    function closeModal() {
-      document.getElementById('contactModal').classList.add('hidden');
-    }
-
-    // เรียกทำงานครั้งแรก
-    renderBooks(books);
+    loadBooks();
   </script>
 </body>
 </html>
